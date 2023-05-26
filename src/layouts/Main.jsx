@@ -13,7 +13,7 @@ class Main extends Component {
 
   updateSearchHandler = (str, type = 'all') => {
     fetch(
-      `http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&t&s=${str}&type=${
+      `https://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&t&s=${str}&type=${
         type !== 'all' ? `${type}` : ''
       }`
     )
@@ -22,9 +22,12 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}`)
+    fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}`)
       .then((res) => res.json())
       .then((data) => this.setState({ movies: data.Search }))
+      .catch(error => {
+        console.error(error);
+      })
   }
   render() {
     const { movies } = this.state
